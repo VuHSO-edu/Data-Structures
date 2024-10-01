@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Bai1 {
     private static Scanner sc = new Scanner(System.in);
 
-    private static void swap(int[] arr, int i, int j) {
+    public static void swap(int[] arr, int i, int j) {
         if (i != j) {
             int temp = arr[i];
             arr[i] = arr[j];
@@ -53,56 +53,58 @@ public class Bai1 {
         }
     }
 
-    public static void mergeSort(int[] arr, int left, int right) {
-        if (left > right) return;
-        int i = 0;
-        int mid = (left + right) / 2;
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-        merge(arr, left, mid, right);
-        System.out.println("Merge Sort: " + Arrays.toString(arr));
+    public static void mergeSort(int[] arr, int left, int right){
+        if (left >= right) return;
 
+        if (left < right){
+            int mid = (left + right) / 2;
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+            System.out.println("Merge Sort: " + Arrays.toString(arr));
+        }
     }
 
-    public static void merge(int[] arr, int left, int mid, int right) {
+    private static void merge(int[] arr, int left,int mid, int right){
         int n1 = mid - left + 1;
         int n2 = right - mid;
         int[] leftArr = new int[n1];
         int[] rightArr = new int[n2];
 
-        for (int i = 0; i < n1; i++) {
+        for(int i = 0; i < n1; i++){
             leftArr[i] = arr[left + i];
         }
-
-        for (int i = 0; i < n2; i++) {
+        for (int i = 0; i < n2; i++){
             rightArr[i] = arr[mid + 1 + i];
         }
 
-        int i = 0, j = 0;
-        int k = left;
-        while (i < n1 && j < n2) {
-            if (leftArr[i] <= rightArr[j]) {
-                arr[k] = leftArr[i];
+        int i = 0;
+        int j = 0;
+        int index = left;
+
+        while(i < n1 && j < n2){
+            if (leftArr[i] < rightArr[j]) {
+                arr[index] = leftArr[i];
+                index++;
                 i++;
             } else {
-                arr[k] = rightArr[j];
+                arr[index] = rightArr[j];
+                index++;
                 j++;
             }
-            k++;
         }
 
-        while (i < n1) {
-            arr[k] = leftArr[i];
+        while(i < n1){
+            arr[index] = leftArr[i];
+            index++;
             i++;
-            k++;
         }
 
-        while (j < n2) {
-            arr[k] = rightArr[j];
+        while(j < n2){
+            arr[index] = rightArr[j];
+            index++;
             j++;
-            k++;
         }
-
     }
 
     public static void quickSort(int[] arr, int low, int high) {
@@ -137,7 +139,7 @@ public class Bai1 {
 
     public static void main(String[] args) {
        int n = sc.nextInt();
-       int[] arr = Arrays.stream(new int[n]).map(i -> (new Random((int)Math.pow(10,5))).nextInt()).toArray();
+       int[] arr = Arrays.stream(new int[n]).map(i -> (new Random()).nextInt((int)Math.pow(10,5))).toArray();
         System.out.println("Begin:" + Arrays.toString(arr));
         System.out.println();
         Bai1.bubbleSort(arr);
@@ -152,10 +154,10 @@ public class Bai1 {
         System.out.println("Insertion Sort: " + Arrays.toString(arr));
         System.out.println("Time complexity of Insertion Sort: " + measureTime(() -> Bai1.insertionSort(arr)));
         System.out.println();
-//        Bai1.mergeSort(arr, 0, arr.length-1);
-//        System.out.println("Merge Sort: " + Arrays.toString(arr));
-//        System.out.println("Time complexity of Merge Sort: " + measureTime(() -> Bai1.mergeSort(arr, 0, arr.length-1)));
-//        System.out.println();
+        Bai1.mergeSort(arr, 0, arr.length-1);
+        System.out.println("Merge Sort: " + Arrays.toString(arr));
+        System.out.println("Time complexity of Merge Sort: " + measureTime(() -> Bai1.mergeSort(arr, 0, arr.length-1)));
+        System.out.println();
         Bai1.quickSort(arr, 0, arr.length-1);
         System.out.println("Quick Sort: " + Arrays.toString(arr));
         System.out.println("Time complexity of Quick Sort: " + measureTime(() -> Bai1.quickSort(arr, 0, arr.length-1)));
