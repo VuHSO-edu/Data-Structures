@@ -1,15 +1,15 @@
 package Hw2_22000132_NguyenDuyVu.Bai3;
 
 public class Card implements Comparable<Card> {
-    private String suit;
+    private Suit suit;
     private int rank;
 
-    public Card(String suit, int rank) {
+    public Card(Suit suit, int rank) {
         this.suit = suit;
         this.rank = rank;
     }
 
-    public String getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 
@@ -17,7 +17,7 @@ public class Card implements Comparable<Card> {
         return rank;
     }
 
-    public void setSuit(String suit) {
+    public void setSuit(Suit suit) {
         this.suit = suit;
     }
 
@@ -32,6 +32,10 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card o) {
-        return Integer.compare(this.rank, o.rank);
+       if (this.rank != o.rank) {
+            return Integer.compare(this.rank, o.rank);
+        } else {
+            return this.suit.compareTo(o.suit);
+        }
     }
 }
