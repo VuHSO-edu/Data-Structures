@@ -30,13 +30,13 @@ public class HTMT {
 
     public static void maBu2(int number) {
         // Chuyển đổi sang bù 2 (8 bit)
-        String binaryString = Integer.toBinaryString(i & 0xFF); // Lấy 8 bit cuối cùng
+        String binaryString = Integer.toBinaryString(number & 0xFF); // Lấy 8 bit cuối cùng
 
         // Đảm bảo độ dài 8 bit
         String paddedBinaryString = String.format("%8s", binaryString).replace(' ', '0');
 
         // In ra kết quả
-        System.out.println("Biểu diễn 8 bit mã bù 2 của " + i + " là: " + paddedBinaryString);
+        System.out.println("Biểu diễn 8 bit mã bù 2 của " + number + " là: " + paddedBinaryString);
 
     }
     public static void chuyenDoiNhiPhanSang8Bit(String originalBits ) {
