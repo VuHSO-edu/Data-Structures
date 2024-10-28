@@ -29,9 +29,14 @@ public class HTMT {
     }
 
     public static void maBu2(int number) {
-        String binaryRepresentation = Integer.toBinaryString(number & 0xFF);
-        binaryRepresentation = String.format("%8s", binaryRepresentation).replace(' ', '0');
-        System.out.println(binaryRepresentation);
+        // Chuyển đổi sang bù 2 (8 bit)
+        String binaryString = Integer.toBinaryString(i & 0xFF); // Lấy 8 bit cuối cùng
+
+        // Đảm bảo độ dài 8 bit
+        String paddedBinaryString = String.format("%8s", binaryString).replace(' ', '0');
+
+        // In ra kết quả
+        System.out.println("Biểu diễn 8 bit mã bù 2 của " + i + " là: " + paddedBinaryString);
 
     }
     public static void chuyenDoiNhiPhanSang8Bit(String originalBits ) {
@@ -54,7 +59,7 @@ public class HTMT {
     }
 
     public static void main(String[] args) {
-        // tinh ma bu 2 cua so 55
+        // tinh ma bu 2 cua so -55
         maBu2(-55);
     }
 }
